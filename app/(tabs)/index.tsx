@@ -1,4 +1,4 @@
-import { Image } from 'expo-image';
+/*import { Image } from 'expo-image';
 import { Platform, StyleSheet } from 'react-native';
 
 import { HelloWave } from '@/components/hello-wave';
@@ -95,4 +95,4 @@ const styles = StyleSheet.create({
     left: 0,
     position: 'absolute',
   },
-});
+});*/
