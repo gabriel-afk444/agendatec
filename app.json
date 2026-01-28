@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "agendatec",
-    "slug": "agendatec",
+    "name": "Agenda Tec",
+    "slug": "Agenda Tec",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/logopng.png",
     "scheme": "agendatec",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
