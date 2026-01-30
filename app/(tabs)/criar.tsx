@@ -39,6 +39,7 @@ export default function Criar() {
       headerBackgroundColor={{ light: '#D0D0D0', dark: '#4e4c4c' }}
       headerImage={
         <IconSymbol size={250} color="#ffff00" name="calendar" />
+        
       }
     >
       <ThemedView style={styles.titulo}>
