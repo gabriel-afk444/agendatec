@@ -4,27 +4,54 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { PlatformPressable } from '@react-navigation/elements';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal, StyleSheet, TextInput, View } from 'react-native';
 import Animated, {
-    useAnimatedStyle,
-    useSharedValue,
-    withSpring,
+  useAnimatedStyle,
+  useSharedValue,
+  withRepeat,
+  withSequence,
+  withSpring,
+  withTiming
 } from 'react-native-reanimated';
+//  Transformando o IconSymbol em um componente animável
+const AnimatedIcon = Animated.createAnimatedComponent(IconSymbol);
 
 const AnimatedPressable = Animated.createAnimatedComponent(PlatformPressable);
 
 export default function Criar() {
   const scale = useSharedValue(1);
+  const pulse = useSharedValue(1);
+
+
+  useEffect(() => {
+    // Faz o ícone pulsar infinitamente
+    pulse.value = withRepeat(
+      withSequence(
+        withTiming(1.02, { duration: 2000 }),
+        withTiming(1, { duration: 2000 })
+      ),
+      -1, // -1 significa repetição infinita
+      true // faz o efeito de vai-e-volta
+    );
+  }, []);
+
+  const animatedHeaderStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: pulse.value }],
+  }));
+
   
   // Estados para controlar o Modal, o texto e a lista de lembretes
   const [modalVisivel, setModalVisivel] = useState(false);
   const [textoLembrete, setTextoLembrete] = useState('');
   const [lembretes, setLembretes] = useState<string[]>([]);
-
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [{ scale: scale.value }],
   }));
+
+
+
+
 
   const adicionarLembrete = () => {
     if (textoLembrete.trim().length > 0) {
@@ -38,8 +65,12 @@ export default function Criar() {
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#D0D0D0', dark: '#4e4c4c' }}
       headerImage={
-        <IconSymbol size={250} color="#ffff00" name="calendar" />
-        
+        <AnimatedIcon
+          size={250}
+          color="#ffff00"
+          name="calendar"
+          style={animatedHeaderStyle}
+        />
       }
     >
       <ThemedView style={styles.titulo}>
